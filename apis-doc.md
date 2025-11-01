@@ -266,4 +266,5 @@ If you want, I can now:
 - produce a tidy OpenAPI YAML from this collection,
 - create a Postman environment JSON with `{{base_url}}` and sample `{{token}}`, or
 - augment this file with sample responses and HTTP status codes.
+Note: an expanded machine-friendly API spec and per-area docs have been added under `api-docs/` in the repo. See `api-docs/index.md` for the full list and `api-docs/expanded-endpoints.md` for a 300-endpoint enterprise scaffold derived from your Postman collection and `documents.conf`.
 
