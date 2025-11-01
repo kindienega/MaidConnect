@@ -1,0 +1,695 @@
+{
+  "info": {
+    "name": "MaidConnect API",
+    "_postman_id": "maidconnect-collection-001",
+    "description": "Postman collection for MaidConnect (HomeMaid) Platform API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Signup",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.maidconnect.com/api/v1/auth/signup",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "signup"
+              ]
+            },
+            "description": "Create new user account (maid or employer)",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Meskerem\",\n  \"email\": \"meskerem@example.com\",\n  \"phone\": \"+251912345678\",\n  \"password\": \"StrongPass123!\",\n  \"role\": \"maid\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://api.maidconnect.com/api/v1/auth/login",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            },
+            "description": "Login and retrieve JWT token",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"meskerem@example.com\",\n  \"password\": \"StrongPass123!\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Check Auth",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "https://api.maidconnect.com/api/v1/auth/check-auth",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "check-auth"
+              ]
+            },
+            "description": "Verify active JWT session"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Get All Users (Admin)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "https://api.maidconnect.com/api/v1/users",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "users"
+              ]
+            },
+            "description": "Admin: list all users"
+          }
+        },
+        {
+          "name": "Update My Profile",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "https://api.maidconnect.com/api/v1/users/update-me",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "users",
+                "update-me"
+              ]
+            },
+            "description": "Update user profile",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Name\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Update Password",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "https://api.maidconnect.com/api/v1/users/update-my-password",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "users",
+                "update-my-password"
+              ]
+            },
+            "description": "Change logged-in user's password",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"currentPassword\": \"StrongPass123!\",\n  \"newPassword\": \"NewStrongPass123!\",\n  \"passwordConfirm\": \"NewStrongPass123!\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Workers",
+      "item": [
+        {
+          "name": "List Workers",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "https://api.maidconnect.com/api/v1/workers",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "workers"
+              ]
+            },
+            "description": "Public: list available housemaids"
+          }
+        },
+        {
+          "name": "Get Worker",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "https://api.maidconnect.com/api/v1/workers/6892d8fdad802c5d964357b4",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "workers",
+                "6892d8fdad802c5d964357b4"
+              ]
+            },
+            "description": "Public: view maid profile"
+          }
+        },
+        {
+          "name": "Create Worker Profile",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "https://api.maidconnect.com/api/v1/workers",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "workers"
+              ]
+            },
+            "description": "Create a worker profile (maid role only)",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Meskerem\",\n  \"bio\": \"4 years of cleaning and childcare experience\",\n  \"location\": {\n    \"city\": \"Addis Ababa\"\n  },\n  \"skills\": [\n    \"cleaning\",\n    \"cooking\"\n  ],\n  \"experienceYears\": 4,\n  \"preferredWorkType\": \"live_in\",\n  \"expectedSalary\": {\n    \"min\": 4000,\n    \"max\": 6000,\n    \"currency\": \"ETB\"\n  }\n}"
+            }
+          }
+        },
+        {
+          "name": "Update Worker Profile",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "https://api.maidconnect.com/api/v1/workers/6892d8fdad802c5d964357b4",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "workers",
+                "6892d8fdad802c5d964357b4"
+              ]
+            },
+            "description": "Update worker profile (maid)",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bio\": \"Updated bio text\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Approve Worker (Admin)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "https://api.maidconnect.com/api/v1/workers/approve/6892d8fdad802c5d964357b4",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "workers",
+                "approve",
+                "6892d8fdad802c5d964357b4"
+              ]
+            },
+            "description": "Admin approves worker profile"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Job Requests",
+      "item": [
+        {
+          "name": "List Job Requests",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "https://api.maidconnect.com/api/v1/job-requests",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "job-requests"
+              ]
+            },
+            "description": "List job requests (public/admin)"
+          }
+        },
+        {
+          "name": "Create Job Request",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "https://api.maidconnect.com/api/v1/job-requests",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "job-requests"
+              ]
+            },
+            "description": "Employer posts new job request",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Full-time Nanny\",\n  \"description\": \"Looking for experienced nanny to live in\",\n  \"minSalary\": 5000,\n  \"maxSalary\": 7000,\n  \"location\": \"Bole, Addis Ababa\",\n  \"workType\": \"live_in\",\n  \"duration\": \"permanent\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Get Job Request",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "https://api.maidconnect.com/api/v1/job-requests/789abc123",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "job-requests",
+                "789abc123"
+              ]
+            },
+            "description": "View single job request"
+          }
+        },
+        {
+          "name": "Close Job Request",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "https://api.maidconnect.com/api/v1/job-requests/close/789abc123",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "job-requests",
+                "close",
+                "789abc123"
+              ]
+            },
+            "description": "Employer closes job request"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Messages",
+      "item": [
+        {
+          "name": "List Conversations",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "https://api.maidconnect.com/api/v1/messages/my-conversations",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "messages",
+                "my-conversations"
+              ]
+            },
+            "description": "List all active conversations"
+          }
+        },
+        {
+          "name": "Send Message",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "https://api.maidconnect.com/api/v1/messages",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "messages"
+              ]
+            },
+            "description": "Send chat message",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"recipient\": \"6892d8fdad802c5d964357b4\",\n  \"text\": \"Hello, are you available next month?\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Get Chat With User",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "https://api.maidconnect.com/api/v1/messages/chat-with/6892d8fdad802c5d964357b4",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "messages",
+                "chat-with",
+                "6892d8fdad802c5d964357b4"
+              ]
+            },
+            "description": "Get chat messages with user"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Notifications",
+      "item": [
+        {
+          "name": "List Notifications",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "https://api.maidconnect.com/api/v1/notifications",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "notifications"
+              ]
+            },
+            "description": "List notifications for current user"
+          }
+        },
+        {
+          "name": "Mark Notification Read",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "https://api.maidconnect.com/api/v1/notifications/mark-as-read/99aabbcc",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "notifications",
+                "mark-as-read",
+                "99aabbcc"
+              ]
+            },
+            "description": "Mark single notification as read"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "List Pending Verifications",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "https://api.maidconnect.com/api/v1/admin/verifications",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "admin",
+                "verifications"
+              ]
+            },
+            "description": "Admin: list all pending verifications"
+          }
+        },
+        {
+          "name": "Approve Verification",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "https://api.maidconnect.com/api/v1/admin/verifications/approve/68777",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "admin",
+                "verifications",
+                "approve",
+                "68777"
+              ]
+            },
+            "description": "Admin: approve user verification"
+          }
+        },
+        {
+          "name": "Reject Verification",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "https://api.maidconnect.com/api/v1/admin/verifications/reject/68777",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "admin",
+                "verifications",
+                "reject",
+                "68777"
+              ]
+            },
+            "description": "Admin: reject verification",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"Invalid ID photo\"\n}"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
